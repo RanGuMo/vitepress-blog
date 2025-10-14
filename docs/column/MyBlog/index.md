@@ -857,7 +857,7 @@ export default {
 ```
 export default defineConfig({
   	base: '/vitepress-blog/',  // 这里将会影响之后生成的根路径
-  	title: 'mondaylab-demo-blog', 
+  	title: 'RanGuMo的博客', 
   })
 ```
 
@@ -881,37 +881,36 @@ git init
 git add -A
 git commit -m 'deploy'
 
-# Jacqueline712/mondaylab-blog 替换为自己的用户名和对应的仓库名
-# 意思为将master构建后的代码合并到gh-pages分支上，然后在gh-pages分支上部署~
-git push -f git@github.com:Jacqueline712/vitepress-demo-mondaylab.git master:gh-pages
+# RanGuMo/vitepress-blog 替换为自己的用户名和对应的仓库名
+# 意思为将构建后的代码合并到gh-pages分支上，然后在gh-pages分支上部署~(确保gh-pages分支存在)
+git push -f  https://github.com/RanGuMo/vitepress-blog.git HEAD:gh-pages
 
-cd -
 ```
 
 
 
-之后，先把我们调试完成的代码，推到`github`上的`master`分支上，然后跑脚本，发布到生产环境。本地终端运行如下代码：
+之后，先把我们调试完成的代码，推到`github`上的`main`分支上，然后跑脚本，发布到生产环境。本地终端运行如下代码：
 
 ```
 git add .
 git commit -m "xxx"
-git push origin HEAD:refs/for/master
+git push origin HEAD:refs/for/main
 sh ./vitepress-starter/deploy.sh
 ```
 
 ```bash
 # 普通推送直接到分支
-git push origin master
+git push origin main
 # Gerrit 方式：推送到代码审核系统
-git push origin HEAD:refs/for/master
+git push origin HEAD:refs/for/main
 ```
 
 > 工作流程
 > 使用这种方式推送代码会:
-> 将代码推送到 Gerrit 而不是直接合并到 master 分支
+> 将代码推送到 Gerrit 而不是直接合并到 main分支
 > 在 Gerrit 中创建一个新的代码审查请求 (Change)
 > 其他开发者可以对代码进行审查、评论和批准
-> 只有在审核通过后，代码才会真正合并到 master 分支
+> 只有在审核通过后，代码才会真正合并到 main分支
 > 这是代码协作中常见的做法，特别是在需要代码审查的企业环境中。
 
 最后，可以在仓库的 `Setting → Pages` 中看到最后的地址：
