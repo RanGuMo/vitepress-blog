@@ -234,6 +234,8 @@ features:
 
 ![image-20251013151532043](assets/image-20251013151532043.png)
 
+
+
 到此，一个像模像样的首页就有了。但有些同学会觉得，自定义力度还不够，比如说想在页面的下方再加点图片或者图标之类的，那下面我们就来说说，在vitepress中如何自定义组件。
 
 ### 自定义组件
@@ -854,11 +856,24 @@ export default {
 
 首先，我们在Github上新建一个仓库，假设命名为`vitepress-blog`。之后，我们需要再去 `config.ts` 文件里，做相应的配置。具体如下：
 
-```
+```ts
 export default defineConfig({
   	base: '/vitepress-blog/',  // 这里将会影响之后生成的根路径
   	title: 'RanGuMo的博客', 
   })
+```
+
+favicon.icon 的设置：
+
+```ts
+export default defineConfig({
+  base: '/vitepress-blog/',
+  title: "RanGuMo的博客", // 标题
+  description: "A VitePress Site",
+  head: [
+      // 将 favicon.ico 放在公共目录中，如果设置了 base，则使用 /base/favicon.ico
+      ['link', { rel: 'icon', href: '/vitepress-blog/favicon.ico' }]
+    ],
 ```
 
 

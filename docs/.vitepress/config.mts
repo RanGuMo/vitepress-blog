@@ -6,6 +6,10 @@ export default defineConfig({
   base: '/vitepress-blog/',
   title: "RanGuMo的博客", // 标题
   description: "A VitePress Site",
+  head: [
+      // 将 favicon.ico 放在公共目录中，如果设置了 base，则使用 /base/favicon.ico
+      ['link', { rel: 'icon', href: '/vitepress-blog/favicon.ico' }]
+    ],
   themeConfig: {
     logo: "/avatar.webp", // 表示docs/public/avartar.webp
     // https://vitepress.dev/reference/default-theme-config
