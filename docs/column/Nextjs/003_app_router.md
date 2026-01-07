@@ -121,7 +121,7 @@ export default function BPage() {
 
 ### loading(加载)
 
-> `Next.js` 的 `loading` 是借助了 `Suspense` 实现的，`Suspense` 的具体用法请参考 [Suspense]() 组件
+> `Next.js` 的 `loading` 是借助了 `Suspense` 实现的，`Suspense` 的具体用法请参考 [Suspense](https://message163.github.io/react-docs/react/components/suspense.html) 组件
 
 app/blog/loading.tsx
 

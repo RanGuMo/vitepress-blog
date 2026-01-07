@@ -68,7 +68,7 @@ Content-Type: application/json
 
 结果如下：
 
-```curl
+```http
 curl --request POST --url http://localhost:3000/api/user --header 'content-type: application/json' --header 'user-agent: vscode-restclient' --data '{"name": "张三","age": 18}'
 ```
 
@@ -167,7 +167,7 @@ Content-Type: application/json
 }
 ```
 
-![alt text](http7.png)
+![alt text](./assets/http7.png)
 
 配置完成后，点击 `VSCode` 右下角的状态栏（通常显示 `No Environment`），即可在 `Local` 和 `Production` 之间一键切换。
 
@@ -195,6 +195,7 @@ Content-Type: application/json
 ### 第二步：在后续请求中引用
 
 语法格式为：
+
 ```http
 {{requestName.response.body.path}}
 ```

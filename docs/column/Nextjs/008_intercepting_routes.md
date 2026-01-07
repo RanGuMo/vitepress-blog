@@ -4,7 +4,7 @@
 
 ## 效果展示
 
-让我们直接看个案例，打开 [dribbble.com](dribbble.com) 这个网站，你可以看到很多美图：
+让我们直接看个案例，打开 [dribbble.com](http://dribbble.com) 这个网站，你可以看到很多美图：
 
 ![](./assets/dribbble1.png)
 
