@@ -106,13 +106,13 @@ export default function RootLayout({
 
 > 除了让它们同时展示，你也可以根据条件判断展示：
 
-![](./assets/if.awebp)
+![alt text](./assets/if.png)
 
 ## 举例：实现 Modal
 
 > 在实际开发中，平行路由可以用于渲染弹窗（`Modal`）。
 
-![](./assets/modal.awebp)
+![alt text](./assets/modal.png)
 
 实现的效果是，当跳转到 `/login` 的时候，渲染 `Modal`。
 

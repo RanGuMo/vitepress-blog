@@ -12,7 +12,7 @@
 
 > 将路由按逻辑分组，但不影响 `URL` 路径：
 
-![](./assets/007_route_groups_1.awebp)
+![alt text](./assets/route_groups_1.png)
 
 你会发现，最终的 `URL` 中省略了带括号的文件夹（上图中的`(marketing)`和`(shop)`）。
 
@@ -20,7 +20,7 @@
 
 > 借助路由组，即便在同一层级，也可以创建不同的布局：
 
-![](./assets/007_route_groups_2.awebp)
+![alt text](./assets/route_groups_2.png)
 
 在这个例子中，`/account` 、`/cart`、`/checkout` 都在同一层级。
 
@@ -31,7 +31,7 @@
 
 > 创建多个根布局：
 
-![](./assets/007_route_groups_3.awebp)
+![alt text](./assets/route_groups_3.png)
 
 创建多个根布局，你需要删除掉 `app/layout.js` 文件，然后在每组都创建一个 `layout.js`文件。创建的时候要注意，因为是根布局，所以要有 `<html>` 和 `<body>` 标签。
 

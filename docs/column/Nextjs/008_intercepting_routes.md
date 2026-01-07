@@ -23,8 +23,10 @@
 你看同样一个路由地址，却展示了不同的内容。这就是拦截路由的效果。如果你在 `dribbble.com` 想要访问 `dribbble.com/shots/xxxxx`，此时会拦截 `dribbble.com/shots/xxxxx` 这个路由地址，以 `Modal` 的形式展现。而当`直接访问` `dribbble.com/shots/xxxxx` 时，则是原本的样式。
 
 示意图如下：
-![alt text](./assets/dribbble4.awebp)
-![alt text](./assets/dribbble5.awebp)
+
+![alt text](./assets/dribbble4.png)
+
+![alt text](./assets/dribbble5.png)
 
 这是另一个拦截路由的 Demo 演示：[nextjs-app-route-interception.vercel.app](https://nextjs-app-route-interception.vercel.app/)
 
@@ -39,7 +41,7 @@
 但是要注意的是，这个`匹配的是路由的层级`而`不是文件夹的层级`，就比如路由组、平行路由这些不会影响 `URL` 的文件夹就不会被计算层级。
 
 看个例子：
-![alt text](./assets/dribbble6.awebp)
+![alt text](./assets/dribbble6.png)
 
 `/feed/(..)photo`对应的路由是 `/feed/photo`，要拦截的路由是 `/photo`，两者只差了一个层级，所以使用 `(..)`。
 
