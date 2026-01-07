@@ -21,8 +21,12 @@ export const nav: DefaultTheme.NavItem[] = [
         link: "/column/HTML/", // 表示docs/column/CSS/index.md
       },
       {
-        text: "数据结构与算法",
-        link: "/column/Algorithm/", // 对应docs/column/Algorithm下的index.md文件
+        text: "开发工具链",
+        link: "/column/DevelopmentTooling/001_pnpm", // 对应docs/column/Algorithm 下的index.md文件
+      },
+      {
+        text: "Next.js 学习",
+        link: "/column/Nextjs/001_start", // 对应docs/column/Nextjs 下的index.md文件
       },
     ],
   },
