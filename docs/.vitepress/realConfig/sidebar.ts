@@ -37,6 +37,15 @@ export const sidebar: DefaultTheme.Sidebar = {
           link: '/column/DevelopmentTooling/006_rollup'
         }
       ]
+    },
+    {
+      text: '项目管理模式',
+      items: [
+        {
+          text: 'Monorepo',
+          link: '/column/DevelopmentTooling/007_monorepo'
+        },
+      ]
     }
   ],
   '/column/TypeScript/': [
