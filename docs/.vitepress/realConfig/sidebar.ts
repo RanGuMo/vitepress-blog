@@ -39,6 +39,45 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
+  '/column/TypeScript/': [
+    {
+      text: 'TypeScript',
+      items: [
+        {
+          text: 'TypeScript 起步',
+          link: '/column/TypeScript/001_ts_basic'
+        },
+        {
+          text: 'TypeScript 核心',
+          link: '/column/TypeScript/002_ts_core'
+        },
+        {
+          text: 'TypeScript 进阶',
+          link: '/column/TypeScript/003_ts_advanced'
+        }
+      ]
+    }
+  ],
+  '/column/Vue/': [
+    // 第一部分
+    {
+      text: 'Vue',
+      items: [
+        {
+          text: 'Vue2',
+          link: '/column/Vue/001_vue2'
+        },
+        {
+          text: 'Vuex',
+          link: '/column/Vue/002_vuex'
+        },
+        {
+          text: 'Pinia',
+          link: '/column/Vue/003_pinia'
+        },
+      ]
+    },
+  ],
   '/column/Nextjs/': [
     // 第一部分
     {
@@ -91,5 +130,14 @@ export const sidebar: DefaultTheme.Sidebar = {
         }
       ]
     },
+    {
+      text: 'Proxy代理',
+      items: [
+        {
+          text: 'Proxy代理',
+          link: '/column/Nextjs/011_proxy'
+        }
+      ]
+    }
   ]
 };

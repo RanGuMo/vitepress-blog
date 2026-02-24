@@ -2,7 +2,6 @@
 # 提供三种布局，doc、page和home
 # 官方文档相关配置：https://vitepress.dev/reference/default-theme-layout
 
-
 # 官方文档相关配置： https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
@@ -52,10 +51,9 @@ features:
 
 <!-- 自定义组件 -->
 <script setup>
-import home from './components/home.vue';
+// import home from './components/home.vue';
 // import confetti from "./components/confetti.vue";
 </script>
 
-<home />
+<!-- <home /> -->
 <confetti />
-
