@@ -33,6 +33,10 @@ export const nav: DefaultTheme.NavItem[] = [
         link: "/column/Vue/001_vue2",
       },
       {
+        text: "UniApp",
+        link: "/column/UniApp/001_uniapp",
+      },
+      {
         text: "Next.js 学习",
         link: "/column/Nextjs/001_start",
       },

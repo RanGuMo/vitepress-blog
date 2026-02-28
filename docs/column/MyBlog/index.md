@@ -4,8 +4,6 @@
 
 - [Node.js](https://nodejs.org/) 18 及以上版本。
 
-
-
 ```bash
 pnpm add -D vitepress@next
 ```
@@ -74,19 +72,17 @@ pnpm vitepress init
 
 ![image-20251013122411325](assets/image-20251013122411325.png)
 
-
-
 ### 左上角-logo和名称自定义
 
 docs/config.mts
 
 ```js
 export default defineConfig({
-    title: 'RanGuMo的博客', // 标题
-    themeConfig: {
-        logo: "/avatar.webp", // 表示docs/public/avartar.webp
-    }
-})
+  title: "RanGuMo的博客", // 标题
+  themeConfig: {
+    logo: "/avatar.webp", // 表示docs/public/avartar.webp
+  },
+});
 ```
 
 ![image-20251013123001526](assets/image-20251013123001526.png)
@@ -107,7 +103,7 @@ export default defineConfig({
 
 ```js
 // docs/.vitepress/realConfig/index.ts 配置内容较多，单独起个文件
-export * from './navbar';
+export * from "./navbar";
 ```
 
 ```js
@@ -145,24 +141,20 @@ export const nav: DefaultTheme.NavItem[] = [
 ];
 ```
 
-
-
 ```js
 // 在config.ts中引用
-import { defineConfig } from 'vitepress';
-import { nav } from './realConfig';
+import { defineConfig } from "vitepress";
+import { nav } from "./realConfig";
 
 export default defineConfig({
-    themeConfig: {
-        nav: nav, // 把定义的nav给替换进来
-        socialLinks: [
-          { icon: 'github', link: 'https://github.com/RanGuMo' } // 右上角github图标
-        ]
-    }
-})
+  themeConfig: {
+    nav: nav, // 把定义的nav给替换进来
+    socialLinks: [
+      { icon: "github", link: "https://github.com/RanGuMo" }, // 右上角github图标
+    ],
+  },
+});
 ```
-
-
 
 到这里，我们就完成了`navbar`的美化。具体来看下效果：
 
@@ -178,7 +170,6 @@ export default defineConfig({
 ---
 # 提供三种布局，doc、page和home
 # 官方文档相关配置：https://vitepress.dev/reference/default-theme-layout
-
 
 # 官方文档相关配置： https://vitepress.dev/reference/default-theme-home-page
 layout: home
@@ -226,21 +217,15 @@ features:
     title: 斜杆青年
     details: 是个平平无奇但是又很热爱学习的斜杆青年。
 ---
-
-
 ```
 
 **效果：**
 
 ![image-20251013151532043](assets/image-20251013151532043.png)
 
-
-
 到此，一个像模像样的首页就有了。但有些同学会觉得，自定义力度还不够，比如说想在页面的下方再加点图片或者图标之类的，那下面我们就来说说，在vitepress中如何自定义组件。
 
 ### 自定义组件
-
-
 
 首先，我们在`docs/.vitepress/components`文件夹下定义一个文件，名为`home.vue`。然后在里面写些想要展示的内容所对应的代码，**比如：**
 
@@ -277,8 +262,6 @@ const list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 </style>
 ```
 
-
-
 接着，在`docs/index.md`中引入，具体如下：
 
 ```
@@ -296,8 +279,6 @@ import home from './components/home.vue';
 <home />
 ```
 
-
-
 下面来看实现后的效果：
 
 ![image-20251013151905363](assets/image-20251013151905363.png)
@@ -305,8 +286,6 @@ import home from './components/home.vue';
 ## 侧边栏美化Sidebar
 
 ### 定义入口
-
-
 
 假设说我们现在有一个专栏，叫**数据结构与算法**。那么我们会先去`navbar`定义入口。入口代码在`docs/realConf/navbar.ts`，定义内容如下：
 
@@ -335,16 +314,16 @@ export const nav: DefaultTheme.NavItem[] = [
 创建 `docs/column/Algorithm/index.md` 文件
 
 ```markdown
-
 # 数据结构和算法
 
 ## 算法
+
 > 算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法算法
+
 ### 排序
+
 > 排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法排序算法
 ```
-
-
 
 定义完成之后，来看下现在的效果：
 
@@ -373,7 +352,7 @@ export const nav: DefaultTheme.NavItem[] = [
 
 ```js
 // docs/.vitepress/relaConf/index.ts 配置内容较多，单独起个文件
-export * from './sidebar';
+export * from "./sidebar";
 ```
 
 ```js
@@ -416,18 +395,16 @@ export const sidebar: DefaultTheme.Sidebar = {
 
 ```js
 // 在config.ts中引用
-import { defineConfig } from 'vitepress';
-import { nav, sidebar} from "./realConfig";
+import { defineConfig } from "vitepress";
+import { nav, sidebar } from "./realConfig";
 
 export default defineConfig({
-    themeConfig: {
-        nav: nav,
-        sidebar: sidebar, // 把定义的sidebar给替换进来
-    }
-})
+  themeConfig: {
+    nav: nav,
+    sidebar: sidebar, // 把定义的sidebar给替换进来
+  },
+});
 ```
-
-
 
 最终，我们来看下实现的效果。**具体如下图所示：**
 
@@ -456,11 +433,11 @@ themeConfig: {
 
 ```ts
 // 在.vitepress/theme/index.ts文件
-import DefaultTheme from 'vitepress/theme';
-import './custom.css';
+import DefaultTheme from "vitepress/theme";
+import "./custom.css";
 
 export default {
-  ...DefaultTheme
+  ...DefaultTheme,
 };
 ```
 
@@ -494,15 +471,15 @@ export default {
 ```ts
 // .vitepress/config.ts
 
-import { defineConfig } from 'vitepress'
+import { defineConfig } from "vitepress";
 
 export default defineConfig({
   themeConfig: {
     search: {
-      provider: 'local'
-    }
-  }
-})
+      provider: "local",
+    },
+  },
+});
 ```
 
 ![image-20251013170425613](assets/image-20251013170425613.png)
@@ -725,7 +702,9 @@ export default defineConfig({
 .vp-code-group .tabs::before {
   background: #fc625d;
   border-radius: 50%;
-  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  box-shadow:
+    20px 0 #fdbc40,
+    40px 0 #35cd4b;
   content: " ";
   height: 12px;
   width: 12px;
@@ -774,7 +753,6 @@ if (inBrowser) {
 ---
 # 提供三种布局，doc、page和home
 # 官方文档相关配置：https://vitepress.dev/reference/default-theme-layout
-
 
 # 官方文档相关配置： https://vitepress.dev/reference/default-theme-home-page
 layout: home
@@ -847,7 +825,6 @@ export default {
     app.component("confetti", confetti); // 注册全局组件
   },
 };
-
 ```
 
 ## 📽Github Page部署
@@ -858,9 +835,9 @@ export default {
 
 ```ts
 export default defineConfig({
-  	base: '/vitepress-blog/',  // 这里将会影响之后生成的根路径
-  	title: 'RanGuMo的博客', 
-  })
+  base: "/vitepress-blog/", // 这里将会影响之后生成的根路径
+  title: "RanGuMo的博客",
+});
 ```
 
 favicon.icon 的设置：
@@ -875,8 +852,6 @@ export default defineConfig({
       ['link', { rel: 'icon', href: '/vitepress-blog/favicon.ico' }]
     ],
 ```
-
-
 
 其次，在根目录下创建一个文件夹，名为`vitepress-starter`。之后，建立一个文件，名为`deploy.sh`。具体代码如下：
 
@@ -901,8 +876,6 @@ git commit -m 'deploy'
 git push -f  https://github.com/RanGuMo/vitepress-blog.git HEAD:gh-pages
 
 ```
-
-
 
 之后，先把我们调试完成的代码，推到`github`上的`main`分支上，然后跑脚本，发布到生产环境。本地终端运行如下代码：
 
@@ -931,3 +904,24 @@ git push origin HEAD:refs/for/main
 最后，可以在仓库的 `Setting → Pages` 中看到最后的地址：
 
 ![image-20251014103639323](assets/image-20251014103639323.png)
+
+## 图片预览插件
+
+1. 安装插件
+
+```bash
+pnpm add -D sass-embedded
+pnpm add vitepress-plugin-image-preview
+```
+
+2. 配置插件
+
+```ts
+import { defineConfig } from "vitepress";
+import { ImagePreviewPlugin } from "vitepress-plugin-image-preview";
+export default defineConfig({
+  vite: {
+    plugins: [ImagePreviewPlugin()],
+  },
+});
+```

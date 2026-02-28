@@ -1,6 +1,6 @@
 import { defineConfig } from "vitepress";
 import { nav, sidebar } from "./realConfig";
-
+import { ImagePreviewPlugin } from 'vitepress-plugin-image-preview'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: '/vitepress-blog/',
@@ -38,5 +38,10 @@ export default defineConfig({
   },
   markdown: {
     lineNumbers: true // 显示行号
+  },
+  vite: {
+    plugins: [
+      ImagePreviewPlugin()
+    ]
   }
 });

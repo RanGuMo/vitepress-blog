@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "sass-embedded": "^1.97.3",
     "vitepress": "2.0.0-alpha.12"
   },
   "scripts": {
@@ -8,6 +9,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "canvas-confetti": "^1.9.3"
+    "canvas-confetti": "^1.9.3",
+    "vitepress-plugin-image-preview": "^0.1.1"
   }
 }
