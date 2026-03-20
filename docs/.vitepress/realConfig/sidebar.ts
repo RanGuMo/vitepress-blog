@@ -87,6 +87,57 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     },
   ],
+  '/column/UniApp/': [
+    {
+      text: '黑马优购项目',
+      items: [
+        {
+          text: '1. 起步',
+          link: '/column/UniApp/001_uniapp-1'
+        },
+        {
+          text: '2. tabBar',
+          link: '/column/UniApp/001_uniapp-2'
+        },
+        {
+          text: '3. 首页',
+          link: '/column/UniApp/001_uniapp-3'
+        },
+        {
+          text: '4. 分类',
+          link: '/column/UniApp/001_uniapp-4'
+        },
+        {
+          text: '5. 搜索',
+          link: '/column/UniApp/001_uniapp-5'
+        },
+        {
+          text: '6. 商品列表',
+          link: '/column/UniApp/001_uniapp-6'
+        },
+        {
+          text: '7. 商品详情',
+          link: '/column/UniApp/001_uniapp-7'
+        },
+        {
+          text: '8. 加入购物车',
+          link: '/column/UniApp/001_uniapp-8'
+        },
+        {
+          text: '9. 购物车页面',
+          link: '/column/UniApp/001_uniapp-9'
+        },
+        {
+          text: '10. 登录与支付',
+          link: '/column/UniApp/001_uniapp-10'
+        },
+        {
+          text: '11. 发布',
+          link: '/column/UniApp/001_uniapp-11'
+        },
+      ]
+    },
+  ],
   '/column/Nextjs/': [
     // 第一部分
     {

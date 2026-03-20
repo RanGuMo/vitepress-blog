@@ -34,7 +34,7 @@ export const nav: DefaultTheme.NavItem[] = [
       },
       {
         text: "UniApp",
-        link: "/column/UniApp/001_uniapp",
+        link: "/column/UniApp/001_uniapp-1",
       },
       {
         text: "Next.js 学习",
