@@ -10,6 +10,10 @@ export const nav: DefaultTheme.NavItem[] = [
     link: "/column/MyBlog/",
   },
   {
+    text: "学习路线",
+    link: "/column/StudyRoute/001_git",
+  },
+  {
     text: "前端专栏",
     items: [
       {
@@ -18,7 +22,7 @@ export const nav: DefaultTheme.NavItem[] = [
       },
       {
         text: "CSS",
-        link: "/column/HTML/", // 表示docs/column/CSS/index.md
+        link: "/column/CSS/", // 表示docs/column/CSS/index.md
       },
       {
         text: "开发工具链",

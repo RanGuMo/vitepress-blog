@@ -1,6 +1,7 @@
 import DefaultTheme from "vitepress/theme";
 import confetti from "../../components/confetti.vue";
 import "./custom.css";
+import "./article.css"
 
 export default {
   ...DefaultTheme,

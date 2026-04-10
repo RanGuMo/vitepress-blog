@@ -199,5 +199,22 @@ export const sidebar: DefaultTheme.Sidebar = {
         }
       ]
     }
-  ]
+  ],
+  '/column/StudyRoute/': [{
+    text: '基础阶段',
+    items: [
+      {
+        text: 'git',
+        link: '/column/StudyRoute/001_git'
+      },
+      {
+        text: 'mysql',
+        link: '/column/StudyRoute/002_mysql'
+      },
+      {
+        text: 'Linux',
+        link: '/column/StudyRoute/003_linux'
+      }
+    ]
+  }],
 };
