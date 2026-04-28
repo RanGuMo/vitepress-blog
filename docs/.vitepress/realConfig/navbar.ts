@@ -41,8 +41,12 @@ export const nav: DefaultTheme.NavItem[] = [
         link: "/column/UniApp/001_uniapp-1",
       },
       {
-        text: "Next.js 学习",
+        text: "Next.js",
         link: "/column/Nextjs/001_start",
+      },
+      {
+        text: "Nuxt.js",
+        link: "/column/Nuxtjs/001_start",
       },
     ],
   },
