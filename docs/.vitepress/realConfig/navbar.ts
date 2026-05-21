@@ -38,7 +38,7 @@ export const nav: DefaultTheme.NavItem[] = [
       },
       {
         text: "UniApp",
-        link: "/column/UniApp/001_uniapp-1",
+        link: "/column/UniApp/heima_proj/001_uniapp-1",
       },
       {
         text: "Next.js",

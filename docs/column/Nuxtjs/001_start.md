@@ -1664,62 +1664,72 @@ export const CONSTANTS = {
 
 /** 统一的错误响应格式 */
 interface ApiErrorResponse {
-  code: number;
-  msg: string;
-  data: any;
+    code: number
+    msg: string
+    data: any
 }
 export default defineNitroPlugin((nitroApp) => {
-  nitroApp.hooks.hook("error", (error: any, context) => {
-    const event = context?.event;
-    if (!event || !event.path.startsWith("/api/")) {
-      return; // 非 API 请求交给 Nuxt 默认处理
-    }
+    nitroApp.hooks.hook('error', (error: any, context) => {
+        const event = context?.event
+        if (!event || !event.path.startsWith('/api/')) {
+            return // 非 API 请求交给 Nuxt 默认处理
+        }
 
-    // ========== 1. 默认错误结构 ==========
-    let statusCode = 500;
-    let responseBody: ApiErrorResponse = {
-      code: 500,
-      msg: "服务器内部错误",
-      data: null,
-    };
+        // ========== 1. 默认错误结构 ==========
+        let statusCode = 500
+        let responseBody: ApiErrorResponse = {
+            code: 500,
+            msg: '服务器内部错误',
+            data: null
+        }
 
-    // ========== 2. 判断是否为我们主动抛出的业务错误 ==========
-    if (error?.data && typeof error.data.code === "number") {
-      statusCode = error.statusCode || 400;
-      responseBody = {
-        code: error.data.code,
-        msg: error.data.msg || "未知错误",
-        data: error.data.data || null,
-      };
-    } else {
-      // ========== 3. 非预期错误（运行时错误、数据库异常等）==========
-      // 记录详细日志，生产环境可接入 ELK / Sentry
-      console.error("[API Internal Error]", {
-        path: event.path,
-        method: event.method,
-        message: error?.message,
-        // 生产环境不输出 stack，开发环境保留
-        stack: import.meta.dev
-          ? error?.stack?.split("\n").slice(0, 3).join("\n")
-          : undefined,
-        timestamp: new Date().toISOString(),
-      });
+        // ========== 2. 判断是否为我们主动抛出的业务错误 ==========
+        if (error?.data && typeof error.data.code === 'number') {
+            statusCode = error.statusCode || 400
+            responseBody = {
+                code: error.data.code,
+                msg: error.data.msg || '未知错误',
+                data: error.data.data || null
+            }
+        } else {
+            // ========== 3. 非预期错误（运行时错误、数据库异常等）==========
+            // 如果错误携带 HTTP 状态码（例如通过 createError 抛出的 H3Error），优先使用该状态码
+            if (typeof error?.statusCode === 'number') {
+                statusCode = error.statusCode
+                responseBody = {
+                    code: statusCode,
+                    msg: error?.message || responseBody.msg,
+                    data: null
+                }
+            } else {
+                // 记录详细日志，生产环境可接入 ELK / Sentry
+                console.error('[API Internal Error]', {
+                    path: event.path,
+                    method: event.method,
+                    message: error?.message,
+                    // 生产环境不输出 stack，开发环境保留
+                    stack: import.meta.dev ? error?.stack?.split('\n').slice(0, 3).join('\n') : undefined,
+                    timestamp: new Date().toISOString()
+                })
 
-      // 开发环境返回具体错误消息方便调试，生产环境仅返回通用错误
-      if (import.meta.dev) {
-        responseBody.msg = error?.message || "内部错误";
-      }
-    }
+                // 开发环境返回具体错误消息方便调试，生产环境仅返回通用错误
+                if (import.meta.dev) {
+                    responseBody.msg = error?.message || '内部错误'
+                }
+            }
+        }
 
-    // ========== 4. 设置响应并结束 ==========
-    event.node.res.statusCode = statusCode;
-    event.node.res.setHeader("Content-Type", "application/json");
-    event.node.res.end(JSON.stringify(responseBody));
+        // ========== 4. 设置响应并结束 ==========
+        event.node.res.statusCode = statusCode
+        event.node.res.setHeader('Content-Type', 'application/json')
+        event.node.res.end(JSON.stringify(responseBody))
 
-    // 返回 true 阻止 H3 默认渲染（否则还会输出 stack 等）
-    return true;
-  });
-});
+        // 返回 true 阻止 H3 默认渲染（否则还会输出 stack 等）
+        return true
+    })
+})
+
+
 ```
 
 简化后的 `register.post.ts`
@@ -4107,8 +4117,11 @@ export const loginFetch = (opt: myFetchOptions) => {
                         v-model:value="formState.phone"
                       >
                         <template #prefix>
-                     
-                           <Icon name="mdi:account" style="color: #969696" size="18"/>
+                          <Icon
+                            name="mdi:account"
+                            style="color: #969696"
+                            size="18"
+                          />
                         </template>
                       </a-input>
                     </a-form-item>
@@ -4124,7 +4137,11 @@ export const loginFetch = (opt: myFetchOptions) => {
                         v-model:value="formState.password"
                       >
                         <template #prefix>
-                           <Icon name="mdi:lock" style="color: #969696" size="18"/>
+                          <Icon
+                            name="mdi:lock"
+                            style="color: #969696"
+                            size="18"
+                          />
                         </template>
                       </a-input>
                     </a-form-item>
@@ -4135,7 +4152,14 @@ export const loginFetch = (opt: myFetchOptions) => {
                   <span>登录遇到问题?</span>
                 </a-row>
                 <a-row type="flex" justify="center" class="sign_in_btn">
-                  <a-button @click="login" shape="round"> 登录 </a-button>
+                  <a-button
+                    @click="login"
+                    shape="round"
+                    :loading="loading"
+                    :disabled="loading"
+                  >
+                    {{ loading ? "登录中..." : "登录" }}
+                  </a-button>
                 </a-row>
                 <div class="more-sign">
                   <h6>社交帐号登录</h6>
@@ -4175,50 +4199,107 @@ export const loginFetch = (opt: myFetchOptions) => {
 <script setup>
 import { loginFetch } from "~/composables/useHttpFetch";
 
-const checked = ref(false);
+// --- 状态定义 ---
+const checked = ref(false); // 记住我状态
 const formState = reactive({
-  phone: "13800138001",
-  password: "123456",
+  phone: "",
+  password: "",
 });
-//登录
-const login = () => {
-  //数据校验
+const loading = ref(false); // 加载状态，防止重复提交
 
-  if (formState.phone === "") {
+// --- 初始化：读取“记住我”的状态和手机号 ---
+onMounted(() => {
+  // 1. 获取记住我的状态
+  const rememberMeCookie = useCookie("rememberMe", {
+    maxAge: 60 * 60 * 24 * 30,
+  }); // 记住状态本身存30天
+  if (rememberMeCookie.value === "true") {
+    checked.value = true;
+
+    // 2. 如果记住了，尝试恢复手机号 (出于安全，通常不自动恢复密码，或者需要更复杂的加密存储)
+    // 这里我们只自动填充手机号，提升用户体验
+    const savedPhone = useCookie("savedPhone", { maxAge: 60 * 60 * 24 * 30 });
+    if (savedPhone.value) {
+      formState.phone = savedPhone.value;
+    }
+  }
+});
+
+// --- 登录方法 ---
+const login = async () => {
+  // 1. 基础校验
+  if (!formState.phone) {
     message.error("手机号不能为空哦~");
     return;
   }
-  if (formState.password === "") {
+  if (!formState.password) {
     message.error("密码不能为空哦~");
     return;
   }
-  //请求登录接口
-  loginFetch({
-    method: "POST",
-    body: {
-      phone: formState.phone,
-      password: formState.password,
-    },
-    server: false,
-    key: "loginFetch",
-  }).then(({ data }) => {
-    console.log(data);
-    if (data.value.code !== 200) {
-      message.error(data.value.msg);
+
+  loading.value = true; // 开始加载
+
+  try {
+    // 2. 请求登录接口
+    const { data } = await loginFetch({
+      method: "POST",
+      body: {
+        phone: formState.phone,
+        password: formState.password,
+      },
+      server: false, // 客户端发起请求
+    });
+    const res = data.value;
+    if (!res) {
       return;
     }
-    //存到useCookie里
-    const accessTokenCookie = useCookie("accessToken", {
-      maxAge: 60 * 60 * 24 * 7,
-    });
-    accessTokenCookie.value = data.value.data.accessToken;
-    //存用户信息
-    const userInfoCookie = useCookie("userInfo", { maxAge: 60 * 60 * 24 * 7 });
-    userInfoCookie.value = data.value.data.userInfo;
 
-    // navigateTo('/')
-    window.location.href = "/";
-  });
+    // 3. 登录成功，处理“记住我”和 Token 存储
+    const accessToken = res.data.accessToken;
+    const userInfo = res.data.userInfo;
+
+    // A. 处理 Token 和用户信息
+    // 如果勾选了“记住我”，设置较长的过期时间；否则设置为会话级别（浏览器关闭即失效）
+    const tokenMaxAge = checked.value ? 60 * 60 * 24 * 7 : undefined; // 7天 或 会话
+
+    const accessTokenCookie = useCookie("accessToken", {
+      maxAge: tokenMaxAge,
+      sameSite: "lax",
+    });
+    accessTokenCookie.value = accessToken;
+
+    const userInfoCookie = useCookie("userInfo", {
+      maxAge: tokenMaxAge,
+    });
+    userInfoCookie.value = JSON.stringify(userInfo); // 对象建议序列化存储
+
+    // B. 处理“记住我”的具体逻辑
+    const rememberMeCookie = useCookie("rememberMe", {
+      maxAge: 60 * 60 * 24 * 30,
+    });
+    const savedPhoneCookie = useCookie("savedPhone", {
+      maxAge: 60 * 60 * 24 * 30,
+    });
+
+    if (checked.value) {
+      rememberMeCookie.value = "true";
+      savedPhoneCookie.value = formState.phone; // 保存手机号以便下次自动填充
+    } else {
+      rememberMeCookie.value = "false";
+      savedPhoneCookie.value = null; // 清除保存的手机号
+    }
+
+    message.success("登录成功");
+
+    // 5. 跳转
+    // 推荐使用 Nuxt 的 navigateTo，比 window.location.href 体验更好（无刷新）
+    await navigateTo("/");
+  } catch (err) {
+    console.error("Login error:", err);
+    message.error(err.message || "登录发生错误，请稍后重试");
+  } finally {
+    loading.value = false; // 结束加载
+  }
 };
 </script>
 
@@ -4367,3 +4448,395 @@ const login = () => {
 
 ```
 
+## 注册页面实现
+
+```vue
+<template>
+  <div class="signUp">
+    <a-row>
+      <div class="logo">
+        <NuxtLink href="#" class="">
+          <img src="/images/logo.png" alt="logo" />
+        </NuxtLink>
+      </div>
+    </a-row>
+    <a-row type="flex" justify="center">
+      <a-col :span="16">
+        <a-row>
+          <a-col :span="12">
+            <a-row class="login-left" type="flex" justify="end">
+              <img class="sign_bg" src="/images/sign_bg.png" alt="sign_bg" />
+              <a-row>
+                <a-button
+                  style="width: 250px; height: 45px"
+                  shape="round"
+                  size="large"
+                  type="primary"
+                >
+                  下载简书APP
+                </a-button>
+                <a-popover placement="topRight">
+                  <template #content>
+                    <div class="page_download">
+                      <img
+                        style="width: 100px"
+                        src="/images/login_page_download.png"
+                        alt="download"
+                      />
+                    </div>
+                  </template>
+                  <div class="page_download">
+                    <img src="/images/login_page_download.png" alt="download" />
+                  </div>
+                </a-popover>
+              </a-row>
+            </a-row>
+          </a-col>
+          <a-col :span="12">
+            <div class="login-right">
+              <div class="login-form">
+                <a-row type="flex" justify="center" class="tag-title">
+                  <NuxtLink to="/sign_in" class="sign_in">登录</NuxtLink>
+                  <b>·</b>
+                  <NuxtLink to="/sign_up" class="active">注册</NuxtLink>
+                </a-row>
+                <div class="form">
+                  <a-form :model="formState">
+                    <a-form-item>
+                      <a-input
+                        style="border: none; background-color: #F7F7F7 !important"
+                        placeholder="你的昵称"
+                        v-model:value="formState.nickname"
+                      >
+                        <template #prefix>
+                          <!-- 建议统一使用 Icon 组件，此处保留原图标以维持视觉一致 -->
+                          <i-ep-user-filled />
+                        </template>
+                      </a-input>
+                    </a-form-item>
+                    <a-form-item style="border-top: 1px solid #C8C8C8">
+                      <a-input
+                        style="border: none; background-color: #F7F7F7 !important"
+                        placeholder="手机号"
+                        v-model:value="formState.phone"
+                      >
+                        <template #prefix>
+                          <i-mdi-cellphone-iphone />
+                        </template>
+                      </a-input>
+                    </a-form-item>
+                    <a-form-item style="border-top: 1px solid #C8C8C8">
+                      <a-input
+                        style="
+                          border: none;
+                          background-color: #F7F7F7 !important;
+                        "
+                        placeholder="密码"
+                        type="password"
+                        v-model:value="formState.password"
+                      >
+                        <template #prefix>
+                          <i-ant-design-lock-filled />
+                        </template>
+                      </a-input>
+                    </a-form-item>
+                  </a-form>
+                </div>
+
+                <a-row type="flex" justify="center" class="sign_in_btn">
+                  <a-button
+                    @click="register"
+                    type="success"
+                    shape="round"
+                    :loading="loading"
+                    :disabled="loading"
+                  >
+                    {{ loading ? "注册中..." : "注册" }}
+                  </a-button>
+                </a-row>
+                <a-row type="flex" justify="center">
+                  <p
+                    style="
+                      width: 80%;
+                      color: #b5b5b5;
+                      font-size: 13px;
+                      text-align: center;
+                      margin-top: 10px;
+                    "
+                  >
+                    点击"注册"即表示您同意并愿意遵守简书的
+                    <a href="#">用户协议</a>和<a href="#">隐私政策</a>
+                  </p>
+                </a-row>
+                <div class="more-sign">
+                  <h6>社交帐号注册</h6>
+                  <a-row type="flex" justify="center" style="margin-top: 30px">
+                   <div>
+                      <Icon
+                        name="ant-design:weibo-outlined"
+                        style="color: #e05344"
+                        size="30"
+                      />
+                    </div>
+                    <div style="margin: 0 30px">
+                      <Icon
+                        name="ant-design:wechat-outlined"
+                        style="color: #00bb29"
+                        size="30"
+                      />
+                    </div>
+                    <div>
+                      <Icon
+                        name="ant-design:qq-outlined"
+                        style="color: #498ad5"
+                        size="30"
+                      />
+                    </div>
+                  </a-row>
+                </div>
+              </div>
+            </div>
+          </a-col>
+        </a-row>
+      </a-col>
+    </a-row>
+  </div>
+</template>
+
+<script setup>
+import { registerFetch } from "~/composables/useHttpFetch";
+
+// --- 状态定义 ---
+const formState = reactive({
+  nickname: "",
+  phone: "",
+  password: "",
+});
+
+const loading = ref(false); // 加载状态，防止重复提交
+
+
+
+// --- 注册方法 ---
+const register = async () => {
+  // 1. 基础校验
+  if (!formState.nickname) {
+    message.error("昵称不能为空哦~");
+    return;
+  }
+  if (!formState.phone) {
+    message.error("手机号不能为空哦~");
+    return;
+  }
+  if (!formState.password) {
+    message.error("密码不能为空哦~");
+    return;
+  }
+
+  loading.value = true; // 开始加载
+
+  try {
+    // 2. 请求注册接口
+    const { data } = await registerFetch({
+      method: "POST",
+      body: {
+        nickname: formState.nickname,
+        phone: formState.phone,
+        password: formState.password,
+      },
+      server: false, // 客户端发起请求
+    });
+
+    const res = data.value;
+
+    if (!res) {
+      return;
+    }
+
+    message.success("注册成功~");
+    
+    // 3. 跳转至登录页
+    await navigateTo("/sign_in");
+  } catch (err) {
+    console.error("Register error:", err);
+    message.error(err.message || "注册发生错误，请稍后重试");
+  } finally {
+    loading.value = false; // 结束加载
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.signUp {
+  background: #f1f1f1;
+  height: 100vh;
+  .logo {
+    margin-left: 50px;
+    padding-top: 50px;
+    img {
+      width: 100px;
+    }
+  }
+  .login-left {
+    padding: 20px;
+    .sign_bg {
+      width: 70%;
+      margin-bottom: 40px;
+    }
+    .page_download {
+      background: #ffffff;
+      margin-left: 20px;
+      padding: 5px;
+      img {
+        width: 46px;
+      }
+    }
+  }
+  .login-right {
+    padding: 20px;
+    .login-form {
+      width: 400px;
+      margin: 0 auto;
+      padding: 50px 50px 30px;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 0 8px rgb(0 0 0 / 10%);
+      vertical-align: middle;
+      display: inline-block;
+      .tag-title {
+        font-size: 18px;
+        font-family: Georgia, Times New Roman, Times, Songti SC, serif;
+        NuxtLink:hover {
+          border-bottom: 2px solid #ea6f5a;
+        }
+        .active {
+          font-weight: 700;
+          color: #ea6f5a;
+          border-bottom: 2px solid #ea6f5a;
+          padding: 5px 10px;
+        }
+        b {
+          padding: 5px 15px;
+          color: #969696;
+          font-weight: 700;
+        }
+        .sign_in {
+          padding: 5px 10px;
+          color: #969696;
+        }
+      }
+      .form {
+        margin-top: 30px;
+        background-color: #f7f7f7;
+        border: 1px #c8c8c8 solid;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        .ant-form-item {
+          margin-bottom: 0 !important;
+        }
+      }
+      .more-sign {
+        margin-top: 50px;
+        text-align: center;
+      }
+      .more-sign h6 {
+        position: relative;
+        margin: 0 0 10px;
+        font-size: 12px;
+        color: #b5b5b5;
+      }
+      .more-sign h6:before,
+      .more-sign h6:after {
+        content: "";
+        border-top: 1px solid #b5b5b5;
+        display: block;
+        position: absolute;
+        width: 60px;
+        top: 8px;
+      }
+      .more-sign h6:before {
+        left: 30px;
+      }
+      .more-sign h6:after {
+        right: 30px;
+      }
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.signUp {
+  .ant-input {
+    background-color: #f7f7f7 !important;
+    height: 40px !important;
+    border-radius: 6px;
+    outline: none !important;
+  }
+  .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+    border-color: #c8c8c8 !important;
+    border-right-width: 1px !important;
+    z-index: 1;
+  }
+  .ant-input-affix-wrapper:focus,
+  .ant-input-affix-wrapper-focused {
+    border-color: #c8c8c8 !important;
+    box-shadow: none !important;
+    border-right-width: 1px !important;
+  }
+  .ant-input-affix-wrapper {
+    border-radius: 6px !important;
+  }
+  .ant-input-prefix {
+    margin-right: 8px;
+  }
+  .sign_in_btn {
+    margin-top: 20px;
+    .ant-btn {
+      height: 45px !important;
+      width: 100% !important;
+      background-color: #43bf2f !important;
+      color: #ffffff !important;
+    }
+    .ant-btn:hover,
+    .ant-btn:focus {
+      color: #43bf2f;
+      border-color: #43bf2f;
+    }
+  }
+}
+</style>
+```
+
+
+
+
+
+
+<!-- <embed src="./接口文档模板.pdf"  width="100%" height="2100px" />
+<embed
+    src="./接口文档模板.pdf"
+    type="application/pdf"
+    frameBorder="0"
+    scrolling="auto"
+    height="100%"
+    width="100%"
+></embed>
+
+
+
+<iframe
+    src="./接口文档模板.pdf"
+    frameBorder="0"
+    scrolling="auto"
+    height="100%"
+    width="100%"
+></iframe> -->
+
+
+
+## ⽂章发布⻚初始代码
+
+```bash
+pnpm add @bytemd/plugin-gfm@^1.21.0 @bytemd/plugin-highlight@^1.21.0 @bytemd/vue-next@^1.21.0
+```

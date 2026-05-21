@@ -5,6 +5,7 @@ export const sidebar: DefaultTheme.Sidebar = {
     // 第一部分
     {
       text: '包管理工具',
+      collapsed: false, // 可折叠
       items: [
         {
           text: 'pnpm',
@@ -23,6 +24,7 @@ export const sidebar: DefaultTheme.Sidebar = {
     // 第二部分
     {
       text: '构建工具',
+      collapsed: false, // 可折叠
       items: [
         {
           text: 'Webpack',
@@ -40,6 +42,7 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
     {
       text: '项目管理模式',
+      collapsed: false, // 可折叠
       items: [
         {
           text: 'Monorepo',
@@ -90,51 +93,63 @@ export const sidebar: DefaultTheme.Sidebar = {
   '/column/UniApp/': [
     {
       text: '黑马优购项目',
+      collapsed: false, // 可折叠
       items: [
         {
           text: '1. 起步',
-          link: '/column/UniApp/001_uniapp-1'
+          link: '/column/UniApp/heima_proj/001_uniapp-1'
         },
         {
           text: '2. tabBar',
-          link: '/column/UniApp/001_uniapp-2'
+          link: '/column/UniApp/heima_proj/001_uniapp-2'
         },
         {
           text: '3. 首页',
-          link: '/column/UniApp/001_uniapp-3'
+          link: '/column/UniApp/heima_proj/001_uniapp-3'
         },
         {
           text: '4. 分类',
-          link: '/column/UniApp/001_uniapp-4'
+          link: '/column/UniApp/heima_proj/001_uniapp-4'
         },
         {
           text: '5. 搜索',
-          link: '/column/UniApp/001_uniapp-5'
+          link: '/column/UniApp/heima_proj/001_uniapp-5'
         },
         {
           text: '6. 商品列表',
-          link: '/column/UniApp/001_uniapp-6'
+          link: '/column/UniApp/heima_proj/001_uniapp-6'
         },
         {
           text: '7. 商品详情',
-          link: '/column/UniApp/001_uniapp-7'
+          link: '/column/UniApp/heima_proj/001_uniapp-7'
         },
         {
           text: '8. 加入购物车',
-          link: '/column/UniApp/001_uniapp-8'
+          link: '/column/UniApp/heima_proj/001_uniapp-8'
         },
         {
           text: '9. 购物车页面',
-          link: '/column/UniApp/001_uniapp-9'
+          link: '/column/UniApp/heima_proj/001_uniapp-9'
         },
         {
           text: '10. 登录与支付',
-          link: '/column/UniApp/001_uniapp-10'
+          link: '/column/UniApp/heima_proj/001_uniapp-10'
         },
         {
           text: '11. 发布',
-          link: '/column/UniApp/001_uniapp-11'
+          link: '/column/UniApp/heima_proj/001_uniapp-11'
         },
+      ]
+    },
+    {
+      text: 'uniapp 相关',
+      collapsed: false, // 可折叠
+      items: [
+        {
+          text: '1. Android 本地离线打包',
+          link: '/column/UniApp/uniapp/001_android_package'
+        },
+        
       ]
     },
   ],
